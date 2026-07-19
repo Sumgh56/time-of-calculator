@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Calculator</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Easily calculate the exact duration between two dates or add/subtract days, months, and years from any specific date.">
+    <link rel="icon" href="https://timeofcalculator.com/favicon.png" type="image/png">
+    <link rel="canonical" href="https://timeofcalculator.com/date-calculator.html">
+    <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J0EMX5FFX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9J0EMX5FFX');
+</script> 
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body);
+});
+</script> 
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Date Calculator",
+  "alternateName": "Days Between Dates Calculator",
+  "url": "https://timeofcalculator.com/date-calculator.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "description": "Find the number of days between two dates, calculate date differences, and add or subtract days easily with this free date calculator.",
+  "keywords": "date calculator, days between dates, date difference calculator, add days to date, subtract dates",
+  "publisher": {
+    "@type": "Person",
+    "name": "Suman Ghosh",
+    "jobTitle": "Founder & Project Director",
+    "url": "https://timeofcalculator.com/privacy.html#about"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+    <style>
+      *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }    
+      html, body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      max-width: 100%;
+      overflow-x: hidden;  
+    }
+       .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+       background-color: #006666;
+       border-bottom: 0px solid #cccccc;
+       height: 100%;
+       color: white;      
+       padding: 06px 20px;
+       font-size: 26px;
+       font-weight: 400;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+.menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color:#fff;
+}
+
+/* SIDE MENU (RIGHT) */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    background: rgba(0, 153, 115, 1); /* solid by default */
+    border-left: 1px solid rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    transition: right 0.3s ease, background 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    background: #008080;
+}
+  
+/* MENU HEADER (TOP BAR INSIDE MENU) */
+.menu-header {
+    position: sticky;
+    top: 0;
+    background: #008080;
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1.5px solid rgba(255,255,255,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    z-index: 10;
+    font-weight: 500;
+} 
+/* CLOSE BUTTON */
+.close-btn {
+    font-size: 38px;
+    margin-top: -6px;
+    line-height: 0.45;
+    font-weight: 300;
+    color: #fff;
+}
+/* MENU LINKS */
+#sideMenu a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #fff;
+    background: #008080;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    font-size: 16px;
+    font-weight: 400;
+ }
+#sideMenu a:hover {
+    background: rgba(255, 255, 255, 0.22);
+} 
+        /* BLUR OVERLAY */
+    #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+ }
+ #overlay.active {
+    opacity: 1;
+    visibility: visible;
+ }  
+    h1 {
+      height: 100%;
+      font-size: 22px;
+      font-weight: 600;
+      margin: -28px 7px -28px;
+      color: #003366;
+      text-align: left;
+      padding: 14px 8px;
+    }     
+        .container {
+            width: 100%;
+            max-width: 360px;
+            margin:5px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 16px;            
+            box-sizing: border-box;
+        }       
+        main {
+      margin: 0px;
+      padding: 15px;
+      height: 100%;
+      max-width: 650px;
+      font-size: 15px;
+      text-align: left;
+      margin-top: -15px;
+      margin-bottom: -55px;
+    }
+  
+      h2 {
+      font-size: 19px;
+      color: #003366;
+      margin-top: 10px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+               h3 {
+      font-size: 17px;
+      color: #006080;
+      margin-top: 0px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+       p {
+      margin-bottom: 10px;
+      font-size: 16px;      
+      padding: 0px;
+    }
+    div p {
+      margin-top: -5px;
+      margin-bottom: -8px;
+      font-size: 16px;      
+      padding: 15px;
+      max-width: 650px;
+    }
+    .related-tools a {
+      display: inline-block;
+      margin: 6px 6px 6px 0;
+      padding: 8px 14px;
+      background: #008080;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .related-tools a:hover {
+      background: #009999;
+    }
+   .breadcrumb {
+  max-width: 1080px;
+  padding: 1px 15px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+  font-weight: 400;
+}
+.breadcrumb a {
+  text-decoration: none;
+  color: #009999;
+  font-size: 14px;
+}
+.breadcrumb .arrow {
+  margin: 0 4px;
+  font-size: 18px;
+}
+        .calculator-section { 
+            padding: 14px;
+            font-weight: 600;
+            font-size: 20px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+         }
+        .input-group {
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+      .input-group label{
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 15px;
+            color:#555;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1.2px solid #999;
+            border-radius: 4px;
+            font-size: 16px;
+        }        
+        .flex-inputs {
+            display: flex;
+            gap: 10px;
+        }        
+        .flex-inputs > div {
+            flex: 1;
+        }    
+              button {
+            background-color: #008080;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 19px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }        
+        button:hover {
+            background-color: #009999;
+        }      
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            display: none;
+        }      
+        .result label {
+            color: #2c3e50;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }        
+        .result-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #009973;
+        }       
+             .formula {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-left: 1.2px solid #3498db;
+            font-family: monospace;
+            font-size: 15px; 
+      }       
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 16px;
+    margin: 5px auto;
+
+  }
+ }     
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    max-width: 400px;
+    padding: 20px;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 400px;
+    padding: 20px;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+}
+      #footer {
+      background-color: #006666;
+      height: 100%;
+      color: white;
+      text-align: center;
+      padding: 9px 9px;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+    #footer p {
+  margin-top: 8px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  opacity: 0.9;
+  } 
+     #footer div a {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    } 
+       #footer a {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    }
+    </style>
+</head>
+<body>
+   <header id="site-header">   
+   <div class="header">
+    <a href="/" style="text-decoration:none; color:inherit;"><span style="color: wight; font-size: 21px; font-weight: 500;">TIME</span>ofcalculator<span style="color: #4dffff; font-size: 22px; font-weight: 400;">.com</span></a>
+     <span class="menu-icon" onclick="openMenu()">☰</span>
+  </div>
+     <!-- OVERLAY -->
+    <div id="overlay" onclick="closeMenu()"></div>
+ <!-- SIDE MENU -->
+<nav id="sideMenu">
+    <div class="menu-header">
+        <span>Menu</span>
+        <span class="close-btn" onclick="closeMenu()">×</span>
+    </div>
+    <a href="/">&#x1F3E0; Home</a>
+    <a href="/time-calculator.html">Time Calculator</a>
+    <a href="/hours-calculator.html">Hours Calculator</a>
+    <a href="/date-calculator.html">Date Calculator</a>
+    <a href="/age-calculator.html">Age Calculator</a>
+</nav>
+ </header>
+ <nav class="breadcrumb">
+  <a href="/">Home</a>
+  <span class="arrow">›</span>
+  <span>Date Calculator</span>
+</nav>
+     <h1>Date Calculator</h1>
+      <div class="free-use">
+            <p>Use this free online tool to add or subtract dates and find the number of days between two dates instantly.</p>
+      </div>
+       <div class="container">  
+        <div class="calculator-section">
+            <label form="date">Add/Subtract from Date</label>
+            
+            <div class="input-group">
+                <label for="start-date">Select a Date</label>
+                <input type="date" id="start-date">
+            </div>
+            
+            <div class="input-group">
+                <label for="add-subtract">Add or Subtract</label>
+                <div class="flex-inputs">
+                    <div>
+                        <input type="number" id="days" placeholder="Days" min="0">
+                    </div>
+                    <div>
+                        <input type="number" id="months" placeholder="Months" min="0">
+                    </div>
+                    <div>
+                        <input type="number" id="years" placeholder="Years" min="0">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="operation">Operation</label>
+                <select id="operation">
+                    <option value="add">Add to Date</option>
+                    <option value="subtract">Subtract from Date</option>
+                </select>
+            </div>            
+            <button id="calculate-date">Calculate Date</button>           
+            <div class="result" id="date-result">
+                <label for="result-date">Result :</label>
+                <div class="result-value" id="new-date"></div>
+                <div class="formula" id="date-formula"></div>
+            </div>
+        </div>        
+        <div class="calculator-section">
+            <label form="days-between">Days Between Two Dates</label>
+            
+            <div class="input-group">
+                <label for="first-date">First Date</label>
+                <input type="date" id="first-date">
+            </div>
+            
+            <div class="input-group">
+                <label for="second-date">Second Date</label>
+                <input type="date" id="second-date">
+            </div>
+            
+            <button id="calculate-days">Calculate Days</button>
+            
+            <div class="result" id="days-result">
+                <label for="days-result">Result :</label>
+                <div class="result-value" id="days-between"></div>
+                <div class="formula" id="days-formula"></div>
+            </div>
+        </div>
+    </div>
+<script>
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+function openMenu() {
+    sideMenu.style.right = "0";
+    overlay.classList.add("active");
+}
+
+function closeMenu() {
+    sideMenu.style.right = "-260px";
+    overlay.classList.remove("active");
+}
+
+/* SWIPE SUPPORT */
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove", e => {
+    let currentX = e.touches[0].clientX;
+    let screenWidth = window.innerWidth;
+
+    if (startX > screenWidth - 40 && currentX < startX - 80) openMenu();
+    if (startX > screenWidth - 260 && currentX > startX + 50) closeMenu();
+});
+</script>
+ <main>
+  <section class="related-tools">
+    <h2>Related</h2>
+    <a href="/time-calculator.html">Time Calculator</a>
+    <a href="/age-calculator.html">Age Calculator</a>
+  </section>
+<section>
+  <h2>What is a Date Calculator?</h2>
+  <p>
+    A <strong>Date Calculator</strong> is an online tool used to calculate the difference between two dates or to Add or Subtract days, months, and years from a specific date. It helps users find exact date results without manually counting calendar days.
+  </p>
+   <p>
+     The <strong>Date Addition and Subtraction</strong> is key to accurate scheduling. Whether you are calculating the "Days Between Two Dates" or adding a specific duration to a start date, this guide outlines the mathematical logic required to navigate the calendar precisely.
+   </p>
+ </section>
+<section>
+  <h2>How to Use the Date Calculator</h2>
+  <p>
+    The Date Calculator is a modern tool that helps you easily find the difference between two dates
+    and add or subtract from a specific date. It is useful for planning events, tracking deadlines,
+    managing projects, and organizing personal schedules.
+  </p>
+  <p>
+    <strong>Step 1:</strong> Select the type of calculation you want to perform, such as days between
+    two dates or adding and subtracting days from a chosen date.
+  </p>
+  <p>
+    <strong>Step 2:</strong> Enter the required date values using the calendar input fields.
+    This ensures accurate selection and prevents formatting errors.
+  </p>
+  <p>
+    <strong>Step 3:</strong> Review your inputs and choose the number of days to add or subtract, days between two dates 
+    if applicable. The calculator automatically accounts for leap years and varying month lengths.
+  </p>
+  <p>
+    <strong>Step 4:</strong> Click the calculate button to instantly view the result,
+    displayed clearly for quick understanding.
+  </p>
+  <p>
+    By following these steps, the Date Calculator provides fast, accurate, and reliable date calculations
+    with a clean, user-friendly experience.
+  </p>
+</section>
+   <section class="date-conversion">
+  <h2>Date Conversion Chart Table</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Date Unit</th>
+          <th>Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 Day</td>
+          <td>24 Hours</td>
+        </tr>
+        <tr>
+          <td>1 Day</td>
+          <td>1,440 Minutes</td>
+        </tr>
+        <tr>
+          <td>1 Day</td>
+          <td>86,400 Seconds</td>
+        </tr>
+        <tr>
+          <td>1 Week</td>
+          <td>7 Days</td>
+        </tr>
+        <tr>
+          <td>1 Fortnight</td>
+          <td>14 Days</td>
+        </tr>
+        <tr>
+          <td>1 Month (Average)</td>
+          <td>30.44 Days</td>
+        </tr>
+        <tr>
+          <td>1 Month</td>
+          <td>4.345 Weeks</td>
+        </tr>
+        <tr>
+          <td>1 Quarter</td>
+          <td>3 Months</td>
+        </tr>
+        <tr>
+          <td>1 Year (Common)</td>
+          <td>365 Days</td>
+        </tr>
+        <tr>
+          <td>1 Year (Leap)</td>
+          <td>366 Days</td>
+        </tr>
+        <tr>
+          <td>1 Year</td>
+          <td>52 Weeks</td>
+        </tr>
+        <tr>
+          <td>1 Decade</td>
+          <td>10 Years</td>
+        </tr>
+        <tr>
+          <td>1 Century</td>
+          <td>100 Years</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    <strong>Note:</strong> Month length varies from 28 to 31 days depending on the calendar.
+  </p>
+</section>
+<style>
+.date-conversion {
+  max-width: 400px;
+  margin: 0px;
+  font-family: Arial, sans-serif;
+},
+.table-wrapper {
+  overflow-x: auto;
+  font-size: 16px;
+  margin-bottom: -10px;
+  margin-top: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 4px;
+  text-align: center;
+}
+th {
+  background-color: #e6e6e6;
+  font-weight: 500;
+}
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+.note {
+  margin-top: 18px;
+  text-align: left;
+  font-size: 16px;
+  color: #111;
+}
+</style>
+    <section>
+        <h2>Calculating Days Between Two Dates</h2>
+        <p>
+            To find the total number of days between <strong>Date A</strong> and <strong>Date B</strong>, the most reliable method is to convert both dates into a linear integer format, such as the <strong>Julian Day Number</strong> or total days from a fixed epoch (e.g., January 1, 1970).
+        </p>
+        
+        <h3>The Linear Difference Formula</h3>
+        <p>
+            If \(D_1\) and \(D_2\) represent the total days from a fixed starting point for the two dates:
+        </p>
+        <div class="formula-container">
+            <p class="math-lg">
+                $$\Delta \text{Days} = | D_2 - D_1 |$$
+            </p>
+        </div>
+        <p>
+            In many <strong>Date Duration Solvers</strong>, you can choose to "Include the End Date," which simply adds 1 to the result:
+            $$\text{Inclusive Days} = (D_2 - D_1) + 1$$
+        </p>
+    </section>
+   <section>
+        <h2>Date Addition and Subtraction Formula</h2>
+        <p>
+            When adding or subtracting a duration (days, weeks, or months) from a specific date, the calculator must perform a modular transition across month and year boundaries.
+        </p>
+
+        <h3>The Shift Formula</h3>
+        <div class="formula-container">
+            <p class="math-lg">
+                $$\text{New Date} = \text{Start Date} \pm \text{Duration}$$
+            </p>
+        </div>
+
+        <p>
+            The complexity lies in the "Carry-Over" logic. If adding 10 days to October 25 results in a value greater than the days in October (31), the excess must be carried over to November:
+        </p>
+        <div class="info-box">
+            <strong>The Leap Year Rule:</strong> A year is a leap year if it is divisible by 4, except for century years, which must be divisible by 400.
+         $$\text{Leap Year} \iff (Y \pmod 4$$
+         $$= 0 \text{ AND } Y \pmod{100} \neq 0) \text{ OR }$$
+         $$(Y \pmod{400} = 0)$$
+        </div>
+    </section>
+   </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default dates to today
+            const today = new Date();
+            const todayFormatted = today.toISOString().split('T')[0];
+            
+            document.getElementById('start-date').value = todayFormatted;
+            document.getElementById('first-date').value = todayFormatted;
+            
+            // Set second date to 7 days from today
+            const nextWeek = new Date();
+            nextWeek.setDate(today.getDate() + 7);
+            document.getElementById('second-date').value = nextWeek.toISOString().split('T')[0];
+            
+            // Add/Subtract Date Calculator
+            document.getElementById('calculate-date').addEventListener('click', function() {
+                const startDate = new Date(document.getElementById('start-date').value);
+                const days = parseInt(document.getElementById('days').value) || 0;
+                const months = parseInt(document.getElementById('months').value) || 0;
+                const years = parseInt(document.getElementById('years').value) || 0;
+                const operation = document.getElementById('operation').value;
+                
+                if (isNaN(startDate.getTime())) {
+                    alert('Please select a valid date');
+                    return;
+                }
+                
+                const resultDate = new Date(startDate);
+                let formulaText = '';
+                
+                if (operation === 'add') {
+                    resultDate.setDate(resultDate.getDate() + days);
+                    resultDate.setMonth(resultDate.getMonth() + months);
+                    resultDate.setFullYear(resultDate.getFullYear() + years);
+                    
+                    formulaText = `Formula: Start Date + ${years} years + ${months} months + ${days} days`;
+                } else {
+                    resultDate.setDate(resultDate.getDate() - days);
+                    resultDate.setMonth(resultDate.getMonth() - months);
+                    resultDate.setFullYear(resultDate.getFullYear() - years);
+                    
+                    formulaText = `Formula: Start Date - ${years} years - ${months} months - ${days} days`;
+                }
+                
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('new-date').textContent = resultDate.toLocaleDateString('en-US', options);
+                document.getElementById('date-formula').textContent = formulaText;
+                document.getElementById('date-result').style.display = 'block';
+            });
+            
+            // Days Between Dates Calculator
+            document.getElementById('calculate-days').addEventListener('click', function() {
+                const firstDate = new Date(document.getElementById('first-date').value);
+                const secondDate = new Date(document.getElementById('second-date').value);
+                
+                if (isNaN(firstDate.getTime()) || isNaN(secondDate.getTime())) {
+                    alert('Please select valid dates');
+                    return;
+                }
+                
+                // Calculate the difference in milliseconds
+                const timeDiff = Math.abs(secondDate.getTime() - firstDate.getTime());
+                
+                // Convert milliseconds to days
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                document.getElementById('days-between').textContent = `${daysDiff} day${daysDiff !== 1 ? 's' : ''}`;
+                document.getElementById('days-formula').textContent = `Formula: (Date 2 - Date 1) / (1000 ms × 60 s × 60 min × 24 hr) = ${daysDiff} days`;
+                document.getElementById('days-result').style.display = 'block';
+            });
+        });
+ </script>
+  <footer id="footer">
+      <nav>
+      <a href="/privacy.html#terms">Terms of Service</a> | 
+      <a href="/privacy.html#privacy">Privacy Policy</a> |
+      <a href="/privacy.html#about">About Us</a>
+      <br><a href="/privacy.html#contact">Contact Us</a>
+     </nav>
+    <p>&copy; <span id="yearRange"></span> Time of Calculator, All rights reserved.</p>
+  </footer>
+<script>
+  const startYear = 2025; // starting year
+  const currentYear = new Date().getFullYear(); // current year
+  document.getElementById("yearRange").textContent = `${startYear} - ${currentYear}`;
+</script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time of Calculator: Free Online Time, Hours, Date &amp; Age Tools</title>
+    <meta name="description" content="Calculate time, hours, dates, and age accurately with Time of Calculator. Use our free online tools to add, subtract, or find duration for work and study.">
+    <meta name="robots" content="index, follow">
+    <meta name="p:domain_verify" content="23f850216d3fb50956d75467f428643b"/>
+    <meta name="google-site-verification" content="GDwPxWtQBq8vcS8N2wgbqez3RobymvTDFbTaDLj5a5o">    
+    <link rel="icon" href="https://timeofcalculator.com/favicon.png" type="image/png">
+    <link rel="canonical" href="https://timeofcalculator.com/">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J0EMX5FFX"></script>
+ <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9J0EMX5FFX');
+ </script>  
+  <!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Time of Calculator",
+  "url": "https://timeofcalculator.com/",
+  "author": {
+    "@type": "Person",
+    "name": "Suman Ghosh",
+    "jobTitle": "Founder & Project Director",
+    "url": "https://timeofcalculator.com/privacy.html#about"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Time of Calculator",
+  "alternateName": "Online Time, Hours, Date & Age Calculators",
+  "url": "https://timeofcalculator.com/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "description": "Free online calculator tools including time calculator, hours calculator, date calculator, and age calculator for accurate and instant calculations.",
+  "publisher": {
+    "@type": "Person",
+    "name": "Suman Ghosh",
+    "jobTitle": "Founder & Project Director",
+    "url": "https://timeofcalculator.com/privacy.html#about"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Time of Calculator",
+  "url": "https://timeofcalculator.com/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Action Area 1A, New Town",
+    "addressLocality": "Kolkata",
+    "postalCode": "700156",
+    "addressRegion": "West Bengal",
+    "addressCountry": "IN"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "email": "suman.ghosh@timeofcalculator.com",
+      "contactType": "official support",
+      "availableLanguage": "en"
+    },
+    {
+      "@type": "ContactPoint",
+      "email": "contact@timeofcalculator.com",
+      "contactType": "technical support",
+      "availableLanguage": "en"
+    }
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Suman Ghosh",
+    "jobTitle": "Founder & Project Director",
+    "url": "https://timeofcalculator.com/privacy.html#about",
+    "email": "suman.ghosh@timeofcalculator.com"
+  }
+}
+</script>
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body);
+});
+</script>
+  
+   <style>
+     *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }    
+      html, body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+       .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+       background-color: #006666;
+       border-bottom: 0px solid #cccccc;
+       height: 100%;
+       color: white;      
+       padding: 06px 20px;
+       font-size: 26px;
+       font-weight: 400;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+.menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+}
+/* SIDE MENU (RIGHT) */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    background: rgba(0, 153, 115, 1); /* solid by default */
+    border-left: 1px solid rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    transition: right 0.3s ease, background 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    background: #008080;
+} 
+/* MENU HEADER (TOP BAR INSIDE MENU) */
+.menu-header {
+    position: sticky;
+    top: 0;
+    background: #008080;
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1.5px solid rgba(255,255,255,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    z-index: 10;
+    font-weight: 500;
+} 
+/* CLOSE BUTTON */
+.close-btn {
+    font-size: 38px;
+    margin-top: -6px;
+    line-height: 0.45;
+    font-weight: 300;
+    color: #fff;
+}
+/* MENU LINKS */
+#sideMenu a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #fff;
+    background: #008080;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    font-size: 16px;
+    font-weight: 400;
+ }
+#sideMenu a:hover {
+    background: rgba(255, 255, 255, 0.22);
+} 
+     /* BLUR OVERLAY */
+    #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+ }
+ #overlay.active {
+    opacity: 1;
+    visibility: visible;
+ } 
+    h1 {
+      height: 100%;
+      font-size: 22px;
+      font-weight: 600;
+      margin: 5px 0px -30px;
+      color: #003366;
+      text-align: left;
+      padding: 15px 15px;
+    }
+     div p {
+      margin-bottom: -8px;
+      font-size: 16px;      
+      padding: 15px;
+      color:#111;
+      max-width: 650px;
+    }  
+    #content {
+      margin: 0px;
+      padding: 15px;
+      height: 100%;
+      max-width: 650px;
+      font-size: 15px;
+      text-align: left;
+      margin-top: -15px;
+      margin-bottom: -55px;
+    }      
+    h2 {
+      font-size: 19px;
+      color: #003366;
+      margin-top: 10px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+     p {
+      margin-bottom: 10px;
+      font-size: 16px;      
+      padding: 0px;
+    } 
+  .time-tools-hub {
+    max-width: 400px;
+   margin: auto 0px;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+.time-tools-hub h2 {
+  font-size: 19px;
+  margin-bottom: 12px;
+  margin-top: -8px;
+}
+.time-tools-hub ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+.time-tools-hub li a {
+  display: block;
+  background: #e6f4f3;
+  padding: 9px;
+  border-radius: 4px;
+  border: 1px solid #70dbdb;
+  font-weight: 500;
+  text-align: left;
+  font-size: 17px; 
+  color:#006666;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+      #footer {
+      background-color: #006666;
+      height: 100%;
+      color: white;
+      text-align: center;
+      padding: 9px 9px;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+  #footer p {
+  margin-top: 8px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  opacity: 0.9;
+  }   
+     #footer div a {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    } 
+     #footer a {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    }
+  </style>
+</head>
+<body>
+   <header id="site-header">   
+   <div class="header">
+    <a href="/" style="text-decoration:none; color:inherit;"><span style="color: wight; font-size: 21px; font-weight: 500;">TIME</span>ofcalculator<span style="color: #4dffff; font-size: 22px; font-weight: 400;">.com</span></a>
+     <span class="menu-icon" onclick="openMenu()">☰</span>
+  </div>
+     <!-- OVERLAY -->
+    <div id="overlay" onclick="closeMenu()"></div>
+ <!-- SIDE MENU -->
+<nav id="sideMenu">
+    <div class="menu-header">
+        <span>Menu</span>
+        <span class="close-btn" onclick="closeMenu()">×</span>
+    </div>
+    <a href="/time-calculator.html">Time Calculator</a>
+    <a href="/hours-calculator.html">Hours Calculator</a>
+    <a href="/date-calculator.html">Date Calculator</a>
+    <a href="/age-calculator.html">Age Calculator</a>
+ </nav>
+  </header>
+  <h1>Time of Calculator</h1>
+  <div><p>      
+     Timeofcalculator.com provides free online time calculation tools to help you
+      calculate, add, and subtract time easily. Use our calculators to find time, hours,
+      dates, and age accurately for work, study,
+      and everyday use.
+    </p>
+  </div>
+    <main id="content">
+    <section class="time-tools-hub">
+    <h2>Time Related Calculators</h2>
+    <ul>
+      <li><a href="/time-calculator.html">Time Calculator</a></li>
+      <li><a href="/hours-calculator.html">Hours Calculator</a></li>
+      <li><a href="/date-calculator.html">Date Calculator</a></li>
+      <li><a href="/age-calculator.html">Age Calculator</a></li>
+    </ul>
+  </section>
+   <section>   
+   <h2>Time of Calculator Uses for Time, Hours, Age, and Date Calculations</h2>
+  <p>
+    A Time Calculator is an essential digital tool that helps users perform various time-related calculations quickly and accurately. 
+    It is widely used for calculating time differences, adding or subtracting hours, determining age, and finding the number of days 
+    between two dates. Students, professionals, and everyday users benefit from time calculators because they simplify complex 
+    calculations and provide instant results with clear explanations.
+  </p>
+  <p>
+    Understanding time calculations is important in daily life. Whether you are tracking work hours, calculating your age, or planning 
+    events, a time calculator ensures precision. In mathematics, time is treated as a measurable quantity, and formulas are used to 
+    compute differences, durations, and conversions.
+  </p>
+
+  <h2>Time Difference</h2>
+
+  <p>
+    The time difference between two time points is calculated by subtracting the starting time from the ending time. 
+    This is one of the most common uses of a time calculator.
+  </p>
+  <p>$$ \text{Time Difference}$$ $$ = \text{End Time} - \text{Start Time} $$</p>
+
+  <p>
+    For example, if you start work at 9:00 AM and finish at 5:00 PM, the time difference is:
+  </p>
+  <p>$$ 17:00 - 09:00 = 8 \text{ hours} $$</p>
+  <p>
+    This formula is widely used in attendance systems, project tracking, and time management.
+  </p>
+
+  <h2>Hours Calculation</h2>
+  <p>
+    Calculating total hours is useful when working with multiple time intervals. A time calculator adds or subtracts hours efficiently.
+  </p>
+
+  <p>$$ \text{Total Hours} = \sum (\text{End Time} - \text{Start Time}) $$</p>
+  <p>
+    Example: If you work from 9:00 AM to 1:00 PM and then from 2:00 PM to 6:00 PM:
+  </p>
+  <p>
+    $$ (13:00 - 09:00) + (18:00 - 14:00)$$ $$ = 4 + 4 = 8 \text{ hours} $$
+  </p>
+  <p>
+    This method is commonly used for payroll calculations, shift management, and productivity tracking.
+  </p>
+
+  <h2>Age Calculation</h2>
+  <p>
+    An age calculator determines a person’s exact age based on their date of birth and the current date. 
+    This is widely used in official documents, school admissions, and personal records.
+  </p>
+  <p>
+    $$ \text{Age} = \text{Current Date} - \text{Date of Birth} $$</p>
+  <p>
+    For example, if someone was born on January 1, 2000, and today is January 1, 2025:
+  </p>
+
+  <p>
+    $$ 2025 - 2000 = 25 \text{ years} $$
+  </p>
+  <p>
+    More precise calculations include months and days, making the result more accurate. 
+    Time calculators automatically adjust for leap years and varying month lengths.
+  </p>
+
+  <h2>Date Difference</h2>
+
+  <p>
+    A date calculator helps determine the number of days between two dates. This is useful for planning trips, 
+    calculating deadlines, and managing schedules.
+  </p>
+
+  <p>$$ \text{Date Difference} = \text{End Date} - \text{Start Date} $$</p>
+
+  <p>
+    Example: If the start date is January 1 and the end date is January 10:
+  </p>
+
+  <p>$$ 10 - 1 = 9 \text{ days} $$</p>
+
+  <p>
+    This calculation is essential for project timelines, event planning, and academic schedules.
+  </p>
+
+  <h2>Time Addition and Subtraction</h2>
+
+  <p>
+    Time calculators can also add or subtract time easily. This is helpful when calculating future or past times.
+  </p>
+
+  <p>$$ \text{New Time}$$ $$ = \text{Current Time} + \text{Added Time} $$</p>
+
+  <p>
+    Example: If the current time is 10:30 AM and you add 2 hours:
+  </p>
+
+  <p>$$ 10:30 + 2:00 = 12:30 $$</p>
+
+  <p>
+    Similarly, subtraction works as:
+  </p>
+
+  <p>
+    $$ \text{New Time}$$ $$ = \text{Current Time} - \text{Subtracted Time} $$
+  </p>
+
+  <h2>Conclusion</h2>
+  <p>
+    A Time Calculator is a powerful and essential tool for handling time, hours, age, and date calculations. 
+    By using mathematical formulas and automated systems, it simplifies complex problems into easy steps. 
+    Whether you are a student learning basic concepts or a professional managing schedules, a time calculator 
+    improves accuracy and efficiency.
+  </p>
+  <p>
+    With the help of formulas such as time difference, total hours, age calculation, and date difference, 
+    users can perform calculations quickly and confidently. Practicing these concepts regularly will help 
+    build a strong foundation in mathematics and real-life problem-solving.
+  </p>
+
+</section>
+</main>
+
+  <script>
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+function openMenu() {
+    sideMenu.style.right = "0";
+    overlay.classList.add("active");
+}
+
+function closeMenu() {
+    sideMenu.style.right = "-260px";
+    overlay.classList.remove("active");
+}
+
+/* SWIPE SUPPORT */
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove", e => {
+    let currentX = e.touches[0].clientX;
+    let screenWidth = window.innerWidth;
+
+    if (startX > screenWidth - 40 && currentX < startX - 80) openMenu();
+    if (startX > screenWidth - 260 && currentX > startX + 50) closeMenu();
+});
+</script>
+   <footer id="footer">
+      <nav>
+      <a href="/privacy.html#terms">Terms of Service</a> | 
+      <a href="/privacy.html#privacy">Privacy Policy</a> |
+      <a href="/privacy.html#about">About Us</a>
+      <br><a href="/privacy.html#contact">Contact Us</a>
+     </nav>
+    <p>&copy; <span id="yearRange"></span> Time of Calculator, All rights reserved.</p>
+  </footer>
+<script>
+  const startYear = 2025; // starting year
+  const currentYear = new Date().getFullYear(); // current year
+  document.getElementById("yearRange").textContent = `${startYear} - ${currentYear}`;
+</script>
+</body>
+</html>

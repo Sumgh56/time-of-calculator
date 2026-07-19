@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hours Calculator</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Calculate total work hours and minutes between two times (start & end time) easily. Perfect for tracking shifts and lunch breaks.">   
+    <link rel="icon" href="https://timeofcalculator.com/favicon.png" type="image/png">
+    <link rel="canonical" href="https://timeofcalculator.com/hours-calculator.html">
+     <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J0EMX5FFX"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9J0EMX5FFX');
+ </script> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body);
+});
+</script> 
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hours Calculator",
+  "alternateName": "Work Hours Calculator",
+  "url": "https://timeofcalculator.com/hours-calculator.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "description": "Calculate work hours, shift duration, payroll hours, and total working time easily with this free hours calculator.",
+  "keywords": "hours calculator, work hours calculator, payroll hours calculator, shift hours calculator, calculate working hours",
+  "publisher": {
+    "@type": "Person",
+    "name": "Suman Ghosh",
+    "jobTitle": "Founder & Project Director",
+    "url": "https://timeofcalculator.com/privacy.html#about"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+    <style>
+     *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }    
+      html, body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+       max-width: 100%;
+      overflow-x: hidden;
+    }
+       .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+       background-color: #006666;
+       border-bottom: 0px solid #cccccc;
+       height: 100%;
+       color: white;      
+       padding: 06px 20px;
+       font-size: 26px;
+       font-weight: 400;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+.menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+}
+/* SIDE MENU (RIGHT) */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    background: rgba(0, 153, 115, 1); /* solid by default */
+    border-left: 1px solid rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    transition: right 0.3s ease, background 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    background: #008080;
+}
+  
+/* MENU HEADER (TOP BAR INSIDE MENU) */
+.menu-header {
+    position: sticky;
+    top: 0;
+    background: #008080;
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1.5px solid rgba(255,255,255,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    z-index: 10;
+    font-weight: 500;
+} 
+/* CLOSE BUTTON */
+.close-btn {
+    font-size: 38px;
+    margin-top: -6px;
+    line-height: 0.45;
+    font-weight: 300;
+    color: #fff;
+}
+/* MENU LINKS */
+#sideMenu a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #fff;
+    background: #008080;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    font-size: 16px;
+    font-weight: 400;
+ }
+    #sideMenu a:hover {
+    background: rgba(255, 255, 255, 0.22);
+ }  
+       /* BLUR OVERLAY */
+    #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+ }
+ #overlay.active {
+    opacity: 1;
+    visibility: visible;
+ } 
+        .calculator-container {
+            width: 100%;           
+            margin:5px auto;             
+            max-width: 360px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding:16px;
+        }       
+        h1 {
+      height: 100%;
+      font-size: 22px;
+      font-weight: 600;
+      margin: -5px 0px -35px;
+      color: #003366;
+      text-align: left;
+      padding: 15px;
+    }
+        main {
+      margin: px;
+      padding: 15px;
+      height: 100%;
+      max-width: 650px;
+      font-size: 15px;
+      text-align: left;
+      margin-top: -15px;
+      margin-bottom: -55px;
+    }      
+    h2 {
+      font-size: 19px;
+      color: #003366;
+      margin-top: 10px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+         h3 {
+      font-size: 17px;
+      color: #006080;
+      margin-top: 0px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+        p {
+      margin-bottom: 10px;
+      font-size: 16px;      
+      padding: 0px;
+    }
+    div p {
+      margin-bottom: -8px;
+      margin-top: 5px;
+      font-size: 16px;      
+      padding: 15px;
+      max-width: 650px;
+    }
+    .related-tools a {
+      display: inline-block;
+      margin: 6px 6px 6px 0;
+      padding: 8px 14px;
+      background: #008080;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .related-tools a:hover {
+      background: #009999;
+    }
+  .breadcrumb {
+  max-width: 1080px;
+  padding: 1px 15px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+  font-weight: 400;
+}
+.breadcrumb a {
+  text-decoration: none;
+  color: #009999;
+  font-size: 14px;
+}
+.breadcrumb .arrow {
+  margin: 0 4px;
+  font-size: 18px;
+}
+                .sec  {
+            font-size: 18px;
+            font-weight: 700;
+            color: black; 
+         }           
+        .time-format-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            gap: 15px;
+        }       
+        .format-btn {
+            padding: 10px 20px;
+            border: 1.2px solid #008080;
+            background: white;
+            color: #008080;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }        
+        .format-btn.active {
+            background: #008080;
+            color: white;
+        }        
+        .time-inputs {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+        }        
+        .time-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }        
+        .time-group label {
+            font-size: 15px;
+            color: #303636;
+            font-weight: 500;
+        }        
+        .time-input {
+            display: flex;
+            gap: 5px;
+        }       
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1.2px solid #999;
+            border-radius: 6px;
+            font-size: 17px;
+            text-align: center;
+        }       
+        select {
+            padding: 10px;
+            border: 1.2px solid #999;
+            border-radius: 6px;
+            background: white;
+            color:#008080;
+            font-size: 16px;
+            font-weight: 500;
+        }      
+        .separator {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }       
+        .calculate-btn {
+            width: 100%;
+            padding: 12px;
+            background: #008080;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 19px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 25px;
+        }       
+        .calculate-btn:hover {
+            background:  #009999;
+        }        
+        .result {
+            text-align: center;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            display: none;
+        }        
+        .result label {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 17px;
+            font-weight: 400;
+            text-align: center;
+        }       
+        .result-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: #008080;           
+        }        
+        .formula-display {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #242829;
+            display: none;
+        }       
+        .hidden {
+            display: none;
+        }        
+        #@media (max-width: 1200px) {
+            .calculator-container {
+                padding: 25px;
+            }           
+            .time-inputs {
+                grid-template-columns: 1fr;
+            }            
+            .separator {
+                margin: -25px 0;
+            }
+        }
+ @media (max-width: 480px) {
+  .calculator-container {
+    width 100%;
+    padding: 16px;
+  }
+   .time-inputs {
+   grid-template-columns: 1fr;
+ }            
+    .separator {
+      margin: -25px 0;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .calculator-container {
+    max-width: 400px;
+    padding: 20px;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+  .time-inputs {
+      grid-template-columns: 1fr;
+   }            
+       .separator {
+       margin: -25px 0;
+     }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .calculator-container {
+    max-width: 400px;
+    padding: 20px;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+  .time-inputs {
+     grid-template-columns: 1fr;
+ }            
+     .separator {
+    margin: -25px 0;
+  }
+}
+      #footer {
+      background-color: #006666;
+      height: 100%;
+      color: white;
+      text-align: center;
+      padding: 9px 9px;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+    #footer p {
+  margin-top: 8px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  opacity: 0.9;
+  } 
+     #footer div a {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    } 
+       #footer a {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    }
+    </style>
+</head>
+<body>
+   <header id="site-header">   
+   <div class="header">
+    <a href="/" style="text-decoration:none; color:inherit;"><span style="color: wight; font-size: 21px; font-weight: 500;">TIME</span>ofcalculator<span style="color: #4dffff; font-size: 22px; font-weight: 400;">.com</span></a>   
+     <span class="menu-icon" onclick="openMenu()">☰</span>
+  </div>
+    <!-- OVERLAY -->
+    <div id="overlay" onclick="closeMenu()"></div>
+ <!-- SIDE MENU -->
+<nav id="sideMenu">
+    <div class="menu-header">
+        <span>Menu</span>
+        <span class="close-btn" onclick="closeMenu()">×</span>
+   </div>
+    <a href="/">&#x1F3E0; Home</a>
+    <a href="/time-calculator.html">Time Calculator</a>
+    <a href="/hours-calculator.html">Hours Calculator</a>
+    <a href="/date-calculator.html">Date Calculator</a>
+    <a href="/age-calculator.html">Age Calculator</a>
+</nav>
+ </header>
+<nav class="breadcrumb">
+  <a href="/">Home</a>
+  <span class="arrow">›</span>
+  <span>Hours Calculator</span>
+</nav> 
+    <h1>Hours Calculator</h1>
+    <div><p>Easily find hours and minutes between two times with our free online Hours Calculator.</p></div>
+    <div class="calculator-container">       
+        <div class="time-format-selector">
+            <button class="format-btn active" id="format12">12-Hour Format</button>
+            <button class="format-btn" id="format24">24-Hour Format</button>
+        </div>       
+        <div class="time-inputs">
+            <div class="time-group">
+                <label for="start-hour">Start Time :</label>
+                <div class="time-input">
+                    <input type="number" id="start-hour" min="1" max="12" value="9">
+                    <span class="sec">:</span>
+                    <input type="number" id="start-minute" min="0" max="59" value="0">
+                    <select id="start-period">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="separator"></div>
+            
+            <div class="time-group">
+                <label for="end-hour">End Time :</label>
+                <div class="time-input">
+                    <input type="number" id="end-hour" min="1" max="12" value="5">
+                    <span class="sec">:</span>
+                    <input type="number" id="end-minute" min="0" max="59" value="0">
+                    <select id="end-period">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <button class="calculate-btn" id="calculate">Calculate Hours</button>
+        
+        <div class="result" id="result">
+            <label for="result-time">Total Duration</label>
+            <div class="result-value" id="result-value">0 hours 0 minutes</div>
+        </div>
+        
+        <div class="formula-display" id="formula-display">
+            <strong>Calculation Formula:</strong><br>
+            <span id="formula-text"></span>
+        </div>
+    </div>
+<script>
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+function openMenu() {
+    sideMenu.style.right = "0";
+    overlay.classList.add("active");
+}
+
+function closeMenu() {
+    sideMenu.style.right = "-260px";
+    overlay.classList.remove("active");
+}
+
+/* SWIPE SUPPORT */
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove", e => {
+    let currentX = e.touches[0].clientX;
+    let screenWidth = window.innerWidth;
+
+    if (startX > screenWidth - 40 && currentX < startX - 80) openMenu();
+    if (startX > screenWidth - 260 && currentX > startX + 50) closeMenu();
+});
+</script>
+ <main>
+  <section class="related-tools">
+    <h2>Related</h2>
+    <a href="/time-calculator.html">Time Calculator</a>
+    <a href="/date-calculator.html">Date Calculator</a>
+  </section>
+  <section>
+  <h2>What is an Hours Calculator?</h2>
+  <p>
+    An <strong>Hours Calculator</strong> is an online tool used to calculate the total time of hours and minutes between two times start time and end time. without manual calculation helps users quickly determine accurate time duration.
+  </p>
+  <p>
+     To provide accurate results, a professional hour solver must be able to handle both <strong>12-hours (AM/PM)</strong> and <strong>24-hours (Military)</strong> formats. This guide outlines the mathematical conversions and formulas used to determine elapsed time precisely.
+  </p>
+ </section>
+<section>
+  <h2>How to Use the Hours Calculator</h2>
+  <p>
+    The Hours Calculator is a modern tool designed to help you quickly calculate total hours, 12-Hour Format  or 24-Hour Format
+    time, and find the difference between two time values. It is ideal for tracking work hours, shifts,
+    study time, and project durations with accuracy.
+  </p>
+  <p>
+    <strong>Step 1:</strong> Choose the calculation type you need, such as hours between two times,
+    total worked hours, or 12-Hour Format and 24-Hour Format from a specific time.
+  </p>
+  <p>
+    <strong>Step 2:</strong> Enter the required time details in the input fields. This may include
+    Start Time, End Time, breaks, or additional hours.
+  </p>
+  <p>
+    <strong>Step 3:</strong> Check your inputs for correctness. The calculator automatically manages
+    time formats and converts minutes into hours when needed.
+  </p>
+  <p>
+    <strong>Step 4:</strong> Click the calculate button to instantly view the result in a clear,
+    easy-to-read format.
+  </p>
+  <p>
+    Using the Hours Calculator ensures fast, accurate, and stress-free time calculations for everyday
+    personal and professional use.
+  </p>
+</section>
+
+     <section class="hours-unit-table">
+  <h2>Hours Unit Conversion Table</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Hours (h)</th>
+          <th>Equivalent Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 Hour</td>
+          <td>60 Minutes</td>
+        </tr>
+        <tr>
+          <td>1 Hour</td>
+          <td>3,600 Seconds</td>
+        </tr>
+        <tr>
+          <td>1 Hour</td>
+          <td>0.04167 Days</td>
+        </tr>
+        <tr>
+          <td>2 Hours</td>
+          <td>120 Minutes</td>
+        </tr>
+        <tr>
+          <td>5 Hours</td>
+          <td>300 Minutes</td>
+        </tr>
+        <tr>
+          <td>8 Hours</td>
+          <td>480 Minutes</td>
+        </tr>
+        <tr>
+          <td>12 Hours</td>
+          <td>0.5 Days</td>
+        </tr>
+        <tr>
+          <td>24 Hours</td>
+          <td>1 Day</td>
+        </tr>
+        <tr>
+          <td>48 Hours</td>
+          <td>2 Days</td>
+        </tr>
+        <tr>
+          <td>72 Hours</td>
+          <td>3 Days</td>
+        </tr>
+        <tr>
+          <td>168 Hours</td>
+          <td>1 Week</td>
+        </tr>
+        <tr>
+          <td>720 Hours</td>
+          <td>1 Month (Avg)</td>
+        </tr>
+        <tr>
+          <td>8,760 Hours</td>
+          <td>1 Year</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    <strong>Formula:</strong> 1 hour = 60 minutes = 3,600 seconds
+  </p>
+</section>
+<style>
+.hours-unit-table {
+  max-width: 400px;
+  margin: 0px;
+  font-family: Arial, sans-serif;
+}
+.table-wrapper {
+  overflow-x: auto;
+  font-size: 16px;
+  margin-bottom: -10px;
+  margin-top: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 4px;
+  text-align: center;
+}
+th {
+  background-color: #e6e6e6;
+  font-weight: 500;
+}
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+.note {
+  margin-top: 18px;
+  text-align: left;
+  font-size: 16px;
+  color: #111;
+}
+</style>
+  <section>
+        <h2>12-Hours to 24-Hours Conversion Formula</h2>
+        <p>
+            The 12-hour format divides the 24-hour day into two periods: <strong>AM</strong> (Ante Meridiem) and <strong>PM</strong> (Post Meridiem). To perform mathematical operations, an Hours Calculator typically converts these into a 24-hour integer scale.
+        </p>       
+        <h3>Conversion Logic</h3>
+        <p>
+            The conversion from 12-hour to 24-hour format follows these conditional formulas:
+        </p>
+        <div class="formula-container">
+            <p class="math-lg">
+                $$\text{If AM: } T_{24} = H \pmod{12}$$
+                $$\text{If PM: } T_{24} = (H \pmod{12}) + 12$$
+            </p>
+        </div>
+        <p>
+            For example, 12:00 AM becomes 00:00, while 12:00 PM remains 12:00. Any PM hour from 1:00 PM to 11:00 PM has 12 added to its value (e.g., 3:00 PM becomes 15:00).
+        </p>
+    </section>
+
+    <section>
+        <h2>The Elapsed Time</h2>
+        <p>
+            The primary purpose of an hour utility is to find the duration (\(D\)) between a Start Time (\(T_s\)) and an End Time (\(T_e\)). The simplest representation of this is:
+        </p>
+
+        <div class="formula-container">
+            <p class="math-lg">
+                $$D = T_e - T_s$$
+            </p>
+        </div>
+
+        <h3>Handling the Midnight Transition</h3>
+        <p>
+            A common challenge occurs when the End Time is numerically smaller than the Start Time (e.g., starting at 10 PM and ending at 4 AM). In this scenario, the calculator must account for the change in calendar days. The formula is adjusted as follows:
+        </p>
+        <div class="formula-container">
+            <p class="math-lg">
+                $$\text{If } T_e < T_s: D = (T_e + 24) - T_s$$
+            </p>
+        </div>
+        <p>
+            Adding 24 hours to the end time effectively shifts the calculation to the next day, ensuring the resulting duration is a positive number.
+        </p>
+    </section>
+   </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const format12Btn = document.getElementById('format12');
+            const format24Btn = document.getElementById('format24');
+            const startHour = document.getElementById('start-hour');
+            const startMinute = document.getElementById('start-minute');
+            const startPeriod = document.getElementById('start-period');
+            const endHour = document.getElementById('end-hour');
+            const endMinute = document.getElementById('end-minute');
+            const endPeriod = document.getElementById('end-period');
+            const calculateBtn = document.getElementById('calculate');
+            const result = document.getElementById('result');
+            const resultValue = document.getElementById('result-value');
+            const formulaDisplay = document.getElementById('formula-display');
+            const formulaText = document.getElementById('formula-text');
+            
+            let is24HourFormat = false;
+            
+            // Switch to 12-hour format
+            format12Btn.addEventListener('click', function() {
+                is24HourFormat = false;
+                format12Btn.classList.add('active');
+                format24Btn.classList.remove('active');
+                
+                // Update input limits
+                startHour.min = 1;
+                startHour.max = 12;
+                endHour.min = 1;
+                endHour.max = 12;
+                
+                // Show AM/PM selectors
+                startPeriod.classList.remove('hidden');
+                endPeriod.classList.remove('hidden');
+                
+                // Convert current values if needed
+                if (parseInt(startHour.value) > 12) {
+                    startHour.value = parseInt(startHour.value) - 12;
+                    startPeriod.value = "PM";
+                }
+                
+                if (parseInt(endHour.value) > 12) {
+                    endHour.value = parseInt(endHour.value) - 12;
+                    endPeriod.value = "PM";
+                }
+            });
+            
+            // Switch to 24-hour format
+            format24Btn.addEventListener('click', function() {
+                is24HourFormat = true;
+                format24Btn.classList.add('active');
+                format12Btn.classList.remove('active');
+                
+                // Update input limits
+                startHour.min = 0;
+                startHour.max = 23;
+                endHour.min = 0;
+                endHour.max = 23;
+                
+                // Hide AM/PM selectors
+                startPeriod.classList.add('hidden');
+                endPeriod.classList.add('hidden');
+                
+                // Convert current values if needed
+                if (startPeriod.value === "PM" && parseInt(startHour.value) < 12) {
+                    startHour.value = parseInt(startHour.value) + 12;
+                } else if (startPeriod.value === "AM" && parseInt(startHour.value) === 12) {
+                    startHour.value = 0;
+                }
+                
+                if (endPeriod.value === "PM" && parseInt(endHour.value) < 12) {
+                    endHour.value = parseInt(endHour.value) + 12;
+                } else if (endPeriod.value === "AM" && parseInt(endHour.value) === 12) {
+                    endHour.value = 0;
+                }
+            });
+            
+            // Calculate hours
+            calculateBtn.addEventListener('click', function() {
+                let startTime, endTime;
+                
+                if (is24HourFormat) {
+                    // 24-hour format calculation
+                    startTime = parseInt(startHour.value) * 60 + parseInt(startMinute.value);
+                    endTime = parseInt(endHour.value) * 60 + parseInt(endMinute.value);
+                    
+                    // Handle overnight calculation
+                    if (endTime < startTime) {
+                        endTime += 24 * 60; // Add 24 hours
+                    }
+                } else {
+                    // 12-hour format calculation
+                    let startHourValue = parseInt(startHour.value);
+                    let endHourValue = parseInt(endHour.value);
+                    
+                    // Convert to 24-hour equivalent for calculation
+                    if (startPeriod.value === "PM" && startHourValue !== 12) {
+                        startHourValue += 12;
+                    } else if (startPeriod.value === "AM" && startHourValue === 12) {
+                        startHourValue = 0;
+                    }
+                    
+                    if (endPeriod.value === "PM" && endHourValue !== 12) {
+                        endHourValue += 12;
+                    } else if (endPeriod.value === "AM" && endHourValue === 12) {
+                        endHourValue = 0;
+                    }
+                    
+                    startTime = startHourValue * 60 + parseInt(startMinute.value);
+                    endTime = endHourValue * 60 + parseInt(endMinute.value);
+                    
+                    // Handle overnight calculation
+                    if (endTime < startTime) {
+                        endTime += 24 * 60; // Add 24 hours
+                    }
+                }
+                
+                const totalMinutes = endTime - startTime;
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                
+                // Display result
+                resultValue.textContent = `${hours} hours ${minutes} minutes`;
+                result.style.display = 'block';
+                
+                // Display formula
+                let startDisplay, endDisplay;
+                
+                if (is24HourFormat) {
+                    startDisplay = `${startHour.value.padStart(2, '0')}:${startMinute.value.padStart(2, '0')}`;
+                    endDisplay = `${endHour.value.padStart(2, '0')}:${endMinute.value.padStart(2, '0')}`;
+                } else {
+                    startDisplay = `${startHour.value}:${startMinute.value.padStart(2, '0')} ${startPeriod.value}`;
+                    endDisplay = `${endHour.value}:${endMinute.value.padStart(2, '0')} ${endPeriod.value}`;
+                }
+                
+                formulaText.textContent = `(${endDisplay}) - (${startDisplay}) = ${hours} hours ${minutes} minutes`;
+                formulaDisplay.style.display = 'block';
+            });
+            
+            // Input validation
+            function validateInput(input, min, max) {
+                let value = parseInt(input.value);
+                if (isNaN(value) || value < min) {
+                    input.value = min;
+                } else if (value > max) {
+                    input.value = max;
+                }
+            }
+            
+            startHour.addEventListener('change', function() {
+                validateInput(this, is24HourFormat ? 0 : 1, is24HourFormat ? 23 : 12);
+            });
+            
+            startMinute.addEventListener('change', function() {
+                validateInput(this, 0, 59);
+            });
+            
+            endHour.addEventListener('change', function() {
+                validateInput(this, is24HourFormat ? 0 : 1, is24HourFormat ? 23 : 12);
+            });
+            
+            endMinute.addEventListener('change', function() {
+                validateInput(this, 0, 59);
+            });
+            
+            // Pad single digit numbers with leading zero
+            function padZero(num) {
+                return num.toString().padStart(2, '0');
+            }
+            
+            // Initialize with default values
+            startMinute.value = padZero(startMinute.value);
+            endMinute.value = padZero(endMinute.value);
+        });
+ </script>
+   <footer id="footer">
+      <nav>
+      <a href="/privacy.html#terms">Terms of Service</a> | 
+      <a href="/privacy.html#privacy">Privacy Policy</a> |
+      <a href="/privacy.html#about">About Us</a>
+      <br><a href="/privacy.html#contact">Contact Us</a>
+     </nav>
+    <p>&copy; <span id="yearRange"></span> Time of Calculator, All rights reserved.</p>
+  </footer>
+<script>
+  const startYear = 2025; // starting year
+  const currentYear = new Date().getFullYear(); // current year
+  document.getElementById("yearRange").textContent = `${startYear} - ${currentYear}`;
+</script>
+</body>
+</html>

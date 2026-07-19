@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Calculator | Add, Subtract &amp; Convert Time Instantly</title>
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Quickly add or subtract days, hours, minutes, and seconds. Find the exact time difference between two timestamps with our free online tool.">
+    <link rel="icon" href="https://timeofcalculator.com/favicon.png" type="image/png">
+    <link rel="canonical" href="https://timeofcalculator.com/time-calculator.html">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J0EMX5FFX"></script>
+ <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9J0EMX5FFX');
+ </script>  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body);
+});
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Time Calculator",
+  "alternateName": "Time Duration Calculator",
+  "url": "https://timeofcalculator.com/time-calculator.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "description": "Free online time calculator to add and subtract time, calculate time duration, and find hours and minutes between two times.",
+  "keywords": "time calculator, time duration calculator, add time, subtract time, hours and minutes calculator",
+  "publisher": {
+    "@type": "Person",
+    "name": "Suman Ghosh",
+    "jobTitle": "Founder & Project Director",
+    "url": "https://timeofcalculator.com/privacy.html#about"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+   <style>
+     *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }    
+      html, body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+       .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+       background-color: #006666;
+       border-bottom: 0px solid #cccccc;
+       height: 100%;
+       color: white;      
+       padding: 06px 20px;
+       font-size: 26px;
+       font-weight: 400;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+.menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+}
+/* SIDE MENU (RIGHT) */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    background: rgba(0, 153, 115, 1); /* solid by default */
+    border-left: 1px solid rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    transition: right 0.3s ease, background 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    background: #008080;
+}
+  
+/* MENU HEADER (TOP BAR INSIDE MENU) */
+.menu-header {
+    position: sticky;
+    top: 0;
+    background: #008080;
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1.5px solid rgba(255,255,255,0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    z-index: 10;
+    font-weight: 500;
+} 
+/* CLOSE BUTTON */
+.close-btn {
+    font-size: 38px;
+    margin-top: -6px;
+    line-height: 0.45;
+    font-weight: 300;
+    color: #fff;
+}
+/* MENU LINKS */
+#sideMenu a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #fff;
+    background: #008080;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    font-size: 16px;
+    font-weight: 400;
+ }
+#sideMenu a:hover {
+    background: rgba(255, 255, 255, 0.22);
+} 
+     /* BLUR OVERLAY */
+    #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+ }
+ #overlay.active {
+    opacity: 1;
+    visibility: visible;
+ } 
+    h1 {
+      height: 100%;
+      font-size: 22px;
+      font-weight: 600;
+      margin: -5px 0px -30px;
+      color: #003366;
+      text-align: left;
+      padding: 15px;
+    }
+     div p {
+      margin-bottom: -5px;
+      font-size: 16px;      
+      padding: 15px;
+      max-width: 650px;
+    }  
+    #content {
+      margin: 0px;
+      padding: 15px;
+      height: 100%;
+      max-width: 650px;
+      font-size: 16px;
+      text-align: left;
+      margin-top: -15px;
+      margin-bottom: -55px;
+    }      
+    h2 {
+      font-size: 19px;
+      color: #003366;
+      margin-top: 10px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+    h3 {
+      font-size: 17px;
+      color: #006080;
+      margin-top: 0px;
+      margin-bottom: -0px;
+      text-align: left;
+    }
+     p {
+      margin-bottom: 10px;
+      font-size: 16px;      
+      padding: 0px;
+    } 
+     .breadcrumb {
+  max-width: 1080px;
+  padding: 1px 15px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+  font-weight: 400;
+}
+.breadcrumb a {
+  text-decoration: none;
+  color: #009999;
+  font-size: 14px;
+}
+.breadcrumb .arrow {
+  margin: 0 4px;
+  font-size: 18px;
+}  
+    .related-tools a {
+      display: inline-block;
+      margin: 6px 6px 6px 0;
+      padding: 8px 14px;
+      background: #008080;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .related-tools a:hover {
+      background: #009999;
+    }
+        .calculator {
+            border: 1.15px solid #ccc;
+            border-radius: 5px;
+            padding: 16px;
+            margin:5px auto;           
+            width: 100%;
+            max-width: 360px;
+            box-sizing: border-box;
+        }        
+           time-section, label {
+            font-size: 16px;
+            margin: 10px 2px;
+            text-align: left;
+            font-weight: 500;
+        }        
+        .time-section {
+            margin-bottom: 10px;
+            margin-top: -10px;
+            font-weight: 400;
+        }        
+        .time-row {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            align-items: center;
+        }        
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }        
+        .time-unit label {
+            font-size: 12px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }        
+        .time-unit input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+        }        
+        .operation-radio {
+            display: flex;
+            justify-content: center;
+            margin: 5px 15px;      
+        }        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 6px 26px;
+            border-radius: 4px;
+            transition: background-color 0.2s, transform 0.2s;
+        }       
+        .radio-option:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-2px);
+        }        
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;            
+        }       
+        .radio-option.add {
+            color: #008080;
+        }       
+        .radio-option.subtract {
+            color: #008080;
+        }       
+        .radio-option input[type="radio"]:checked + label {
+            font-weight: 500;
+        }       
+        .calculate-btn {
+            background-color: #008080;
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 19px;
+            font-weight: 500;
+            display: block;
+            margin: 30px auto;
+            width: 200px;
+            transition: background-color 0.2s, transform 0.2s;
+        }        
+        .calculate-btn:hover {
+            background-color: #009999;
+            transform: translateY(-2px);
+        }       
+        .result {
+            margin-top: 30px;
+            padding:10px;
+            border-top: 1.2px solid #ccc;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }        
+        .formula {
+            background-color: #f9f9f9;
+            font-size: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            margin-bottom: -25px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }       
+        .result-display {
+            font-size: 18px;
+            font-weight: 500;
+            padding: 9px;
+            background-color: #e6fff5;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            text-align: center;
+        }              
+            .time-unit {
+                flex: 0 0 calc(25% - 10px);
+            }            
+
+ @media (max-width: 480px) {
+  .calculator {
+    padding: 16px;
+     width: 100%;  
+  }
+ }
+     
+ @media (min-width: 768px) {
+  .calculator {
+    max-width: 500px;
+    padding: 22px;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+  .operation-radio {
+    margin: 15px 22px;
+  }
+  .radio-option {
+    padding: 10px 28px;
+  }
+}    
+  
+/* Desktop */
+@media (min-width: 1024px) {
+  .calculator {
+    max-width: 500px;
+    padding: 22px;
+    margin-left: 16px;
+    margin-right: 0;
+  }
+    .operation-radio {
+        margin: 15px 22px;
+    }            
+  .radio-option {
+      padding: 10px 28px;
+   }
+}
+      #footer {
+      background-color: #006666;
+      height: 100%;
+      color: white;
+      text-align: center;
+      padding: 9px 9px;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+    #footer p {
+  margin-top: 8px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  opacity: 0.9;
+  }  
+       #footer div a {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    } 
+       #footer a {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0 3px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+    }
+  </style>
+</head>
+<body>
+   <header id="site-header">   
+   <div class="header">
+    <a href="/" style="text-decoration:none; color:inherit;"><span style="color: wight; font-size: 21px; font-weight: 500;">TIME</span>ofcalculator<span style="color: #4dffff; font-size: 22px; font-weight: 400;">.com</span></a>
+     <span class="menu-icon" onclick="openMenu()">☰</span>
+  </div>
+     <!-- OVERLAY -->
+    <div id="overlay" onclick="closeMenu()"></div>
+ <!-- SIDE MENU -->
+<nav id="sideMenu">
+    <div class="menu-header">
+        <span>Menu</span>
+        <span class="close-btn" onclick="closeMenu()">×</span>
+    </div>
+    <a href="/">&#x1F3E0; Home</a>
+    <a href="/time-calculator.html">Time Calculator</a>
+    <a href="/hours-calculator.html">Hours Calculator</a>
+    <a href="/date-calculator.html">Date Calculator</a>
+    <a href="/age-calculator.html">Age Calculator</a>
+ </nav>
+  </header>
+   <nav class="breadcrumb">
+  <a href="/">Home</a>
+  <span class="arrow">›</span>
+  <span>Time Calculator</span>
+</nav>
+   <h1>Time Calculator</h1>
+   <div><p>Use this free online tool to calculate time by adding or subtracting days, hours, minutes, and seconds.</p></div>
+    
+    <div class="calculator">
+        <!-- Time 1 Section -->
+        <div class="time-section">
+            <label class="time-1">Time 1 :</label>
+            <div class="time-row">
+                <div class="time-unit">
+                    <label for="days1">DAYS</label>
+                    <input type="number" id="days1" min="0" value="0">
+                    
+                </div>
+                <div class="time-unit">
+                    <label for="hours1">HOURS</label>
+                    <input type="number" id="hours1" min="0" max="23" value="0">
+                    
+                </div>
+                <div class="time-unit">
+                    <label for="minutes1">MINUTES</label>
+                    <input type="number" id="minutes1" min="0" max="59" value="0">
+                    
+                </div>
+                <div class="time-unit">
+                    <label for="seconds1">SECONDS</label>
+                    <input type="number" id="seconds1" min="0" max="59" value="0">
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Operation Selection -->
+        <div class="operation-radio">
+            <div class="radio-option add">
+                <input type="radio" id="addRadio" name="operation" value="add" checked>
+                <label for="addRadio">Add (+)</label>
+            </div>
+            <div class="radio-option subtract">
+                <input type="radio" id="subtractRadio" name="operation" value="subtract">
+                <label for="subtractRadio">Subtract (-)</label>
+            </div>
+        </div>
+        
+        <!-- Time 2 Section -->
+        <div class="time-section">
+            <label class="time-2">Time 2 :</label>
+            <div class="time-row">
+                <div class="time-unit">
+                    <label for="days2">DAYS</label>
+                    <input type="number" id="days2" min="0" value="0">
+                    
+                </div>
+                <div class="time-unit">
+                    <label for="hours2">HOURS</label>
+                    <input type="number" id="hours2" min="0" max="23" value="0">
+                   
+                </div>
+                <div class="time-unit">
+                    <label for="minutes2">MINUTES</label>
+                    <input type="number" id="minutes2" min="0" max="59" value="0">
+                    
+                </div>
+                <div class="time-unit">
+                    <label for="seconds2">SECONDS</label>
+                    <input type="number" id="seconds2" min="0" max="59" value="0">
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Calculate Button -->
+        <button class="calculate-btn" id="calculateBtn">Calculate Time</button>
+        
+        <!-- Results Section -->
+        <div class="result">
+            <label class="time-result">Result :</label>
+            <div class="result-display" id="resultOutput">0 days, 0 hours, 0 minutes, 0 seconds</div>
+            
+            <label class="time-formula">Calculation Formula :</label>
+            <div class="formula" id="formulaOutput">No calculation performed yet</div>
+        </div>
+    </div>
+<script>
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+function openMenu() {
+    sideMenu.style.right = "0";
+    overlay.classList.add("active");
+}
+
+function closeMenu() {
+    sideMenu.style.right = "-260px";
+    overlay.classList.remove("active");
+}
+
+/* SWIPE SUPPORT */
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchmove", e => {
+    let currentX = e.touches[0].clientX;
+    let screenWidth = window.innerWidth;
+
+    if (startX > screenWidth - 40 && currentX < startX - 80) openMenu();
+    if (startX > screenWidth - 260 && currentX > startX + 50) closeMenu();
+});
+</script>
+    <main id="content">
+<section class="related-tools">
+    <h2>Related</h2>
+    <a href="/hours-calculator.html">Hours Calculator</a>
+    <a href="/date-calculator.html">Date Calculator</a>    
+  </section>
+    <section> 
+     <h2>What is a Time Calculator?</h2>
+  <p>
+    A <strong>Time Calculator</strong> is an online tool designed to calculate time differences, add or subtract days, hours, minutes and seconds, and measure durations between two specific times or days. It helps users perform accurate time-based calculations instantly effort.
+  </p>
+   <p>
+     Whether you are adding durations to determine a project deadline or subtracting timestamps to calculate elapsed work hours, The <strong>Time Adding and Subtracting</strong> is the key to accuracy. This guide breaks down the professional methods used to compute temporal data in a clear, academic format.
+   </p>      
+ </section>
+<section>
+  <h2>Time Calculator: Step-by-Step Guide</h2>
+  <p>
+    The Time Calculator is a modern online tool designed to help you add, subtract, and compare time values
+    with speed and accuracy. It is ideal for managing daily schedules, work hours, study time, and travel planning
+    without manual calculations.
+  </p>
+  <p>
+    <strong>Step 1:</strong> Begin by selecting the calculation type you need, such as adding time,
+    subtracting time, or finding the difference between two time values.
+  </p>
+  <p>
+    <strong>Step 2:</strong> Enter the required time inputs using days, hours, minutes, and seconds.
+    The calculator supports clear and structured input to avoid confusion.
+  </p>
+  <p>
+    <strong>Step 3:</strong> Review your entries and apply the chosen operation. The calculator automatically
+    converts extra seconds into minutes and minutes into hours to days for precise results.
+  </p>
+  <p>
+    <strong>Step 4:</strong> Click the calculate button to instantly view the output in a clean,
+    easy-to-read format.
+  </p>
+  <p>
+    This step-by-step approach ensures the Time Calculator delivers fast, reliable, and user-friendly
+    time calculations for everyday use.
+  </p>
+</section>
+ <section class="time-conversion-unit-table">
+  <h2>Time Conversion Unit Table</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Time Unit</th>
+          <th>Equivalent Conversion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1 Second</td>
+          <td>1 second</td>
+        </tr>
+        <tr>
+          <td>1 Minute</td>
+          <td>60 seconds</td>
+        </tr>
+        <tr>
+          <td>1 Hour</td>
+          <td>60 minutes = 3,600 seconds</td>
+        </tr>
+        <tr>
+          <td>1 Day</td>
+          <td>24 hours = 86,400 seconds</td>
+        </tr>
+        <tr>
+          <td>1 Week</td>
+          <td>7 days = 168 hours</td>
+        </tr>
+        <tr>
+          <td>1 Month (Average)</td>
+          <td>= 30.44 days</td>
+        </tr>
+        <tr>
+          <td>1 Quarter</td>
+          <td>3 months = 91 days</td>
+        </tr>
+        <tr>
+          <td>1 Year (Common)</td>
+          <td>365 days = 8,760 hours</td>
+        </tr>
+        <tr>
+          <td>1 Year (Leap)</td>
+          <td>366 days</td>
+        </tr>
+        <tr>
+          <td>1 Decade</td>
+          <td>10 years</td>
+        </tr>
+        <tr>
+          <td>1 Century</td>
+          <td>100 years</td>
+        </tr>
+        <tr>
+          <td>1 Millennium</td>
+          <td>1,000 years</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    <strong>Note:</strong> Month and year lengths vary depending on leap years and calendar systems.
+  </p>
+</section>
+<style>
+.time-conversion-unit-table {
+  max-width: 400px;
+  margin: 0px;
+  font-family: Arial, sans-serif;
+}
+.table-wrapper {
+  overflow-x: auto;
+  font-size: 16px;
+  margin-bottom: -10px;
+  margin-top: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 4px;
+  text-align: center;
+}
+th {
+  background-color: #e6e6e6;
+  font-weight: 500;
+}
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+.note {
+  margin-top: 18px;
+  text-align: left;
+  font-size: 16px;
+  color: #111;
+}
+</style>
+   <section>
+        <h2> Time Addition</h2>
+        <p>
+            When adding two durations, you sum the individual units starting from the right (seconds) and move left (hours). If a sum exceeds 59, you must "carry" the excess to the next unit.
+        </p>
+        
+        <h3>The Logic Formula</h3>
+        <p>
+            Let \(T_1 = H_1:M_1:S_1\) and \(T_2 = H_2:M_2:S_2\). The total seconds \(S_{total}\) is:
+        </p>
+        <div class="formula-card">
+            <p class="math-display">
+                $$S_{result} = (S_1 + S_2) \pmod{60}$$
+                $$M_{carry} = \lfloor (S_1 + S_2) / 60 \rfloor$$
+            </p>
+        </div>
+        <p>
+            The same logic applies to minutes, where the carry goes to the hours column.
+        </p>
+
+        <div class="example-box">
+            <strong>Example: Add 2h 45m and 1h 30m</strong><br>
+            1. Minutes: \(45 + 30 = 75\).<br>
+            2. Convert: \(75 \text{ minutes} = 1 \text{ hour and } 15 \text{ minutes}\).<br>
+            3. Hours: \(2 + 1 + (\text{carry } 1) = 4\).<br>
+            4. Result: <span class="highlight">4 hours and 15 minutes</span>.
+        </div>
+    </section>
+
+    <section>
+        <h2>Time Subtraction</h2>
+        <p>
+            Subtracting time is more complex because it often requires "borrowing." If the seconds or minutes in the subtrahend are larger than the minuend, you must borrow 60 units from the column to the left.
+        </p>
+
+        
+
+        <h3>The Borrowing Formula</h3>
+        <p>
+            If \(M_1 < M_2\), then you modify the units before subtracting:
+        </p>
+        <div class="formula-card">
+            <p class="math-display">
+                $$H_{new} = H_1 - 1$$
+                $$M_{new} = M_1 + 60$$
+            </p>
+        </div>
+        <p>
+            After adjusting, you proceed with standard subtraction for each column.
+        </p>
+    </section>
+
+    <section>
+        <h2>Calculating Elapsed Time</h2>
+        <p>
+            In many professional scenarios, you need to find the duration between a <strong>Start Time</strong> and an <strong>End Time</strong>. The universal formula for elapsed time is:
+        </p>
+        <div class="formula-card">
+            <p class="math-display">
+                $$\text{Duration} = \text{End Time} - \text{Start Time}$$
+            </p>
+        </div>
+        <p>
+            If the end time is on the following day (e.g., 10 PM to 2 AM), a <strong>Duration Calculator</strong> adds 24 hours to the end time before performing the subtraction to avoid negative results.
+        </p>
+    </section>
+ <section class="history-of-timekeeping">
+  <h2>History of Time Keeping Across Civilizations</h2>
+  <p>
+    The history of time keeping across civilizations reflects humanity’s need to measure days, seasons, and
+    events with accuracy. Early societies around the world observed natural cycles such as sunrise, sunset,
+    and lunar phases to track time. Ancient methods included sundials, water clocks, and shadow measurements,
+    which allowed people to organize agriculture, religious rituals, and daily life. As civilizations grew,
+    time keeping became essential for trade, navigation, and social coordination across regions.
+  </p>
+  <p>
+    Mathematical thinking played a key role in time measurement. The division of a day into 24 hours and each
+    hour into 60 minutes is based on the sexagesimal system. This approach influenced time standards used in
+    America, Europe, and the wider world. Mechanical clocks later introduced consistent intervals using gears
+    and oscillations, improving accuracy for scientific and commercial use. Calendar calculations also relied
+    on mathematics to align days, months, and years with astronomical cycles.
+  </p>
+  <p>
+    In the modern world, time keeping evolved with precise instruments such as pendulum clocks, atomic clocks,
+    and digital systems. Standard time zones were established to synchronize regions in America, Europe, and
+    globally. Mathematical formulas now convert time units, calculate differences, and support global
+    communication networks. From ancient observations to modern precision, time keeping remains a foundation
+    of science, technology, and everyday life worldwide.
+  </p>
+</section>
+  </main>
+    <script>     
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all input elements
+            const days1Input = document.getElementById('days1');
+            const hours1Input = document.getElementById('hours1');
+            const minutes1Input = document.getElementById('minutes1');
+            const seconds1Input = document.getElementById('seconds1');
+            
+            const days2Input = document.getElementById('days2');
+            const hours2Input = document.getElementById('hours2');
+            const minutes2Input = document.getElementById('minutes2');
+            const seconds2Input = document.getElementById('seconds2');
+            
+            const addRadio = document.getElementById('addRadio');
+            const subtractRadio = document.getElementById('subtractRadio');
+            const calculateBtn = document.getElementById('calculateBtn');
+            
+            const resultOutput = document.getElementById('resultOutput');
+            const formulaOutput = document.getElementById('formulaOutput');
+            
+            // Get the selected operation from radio buttons
+            function getSelectedOperation() {
+                if (addRadio.checked) return 'add';
+                if (subtractRadio.checked) return 'subtract';
+                return 'add'; // default
+            }
+            
+            // Format time display
+            function formatTime(days, hours, minutes, seconds) {
+                let parts = [];
+                if (days > 0) parts.push(`${days} day${days !== 1 ? 's' : ''}`);
+                if (hours > 0) parts.push(`${hours} hour${hours !== 1 ? 's' : ''}`);
+                if (minutes > 0) parts.push(`${minutes} minute${minutes !== 1 ? 's' : ''}`);
+                if (seconds > 0) parts.push(`${seconds} second${seconds !== 1 ? 's' : ''}`);
+                
+                if (parts.length === 0) return "0 seconds";
+                return parts.join(', ');
+            }
+            
+            // Calculate button click
+            calculateBtn.addEventListener('click', function() {
+                // Get input values
+                const time1 = {
+                    days: parseInt(days1Input.value) || 0,
+                    hours: parseInt(hours1Input.value) || 0,
+                    minutes: parseInt(minutes1Input.value) || 0,
+                    seconds: parseInt(seconds1Input.value) || 0
+                };
+                
+                const time2 = {
+                    days: parseInt(days2Input.value) || 0,
+                    hours: parseInt(hours2Input.value) || 0,
+                    minutes: parseInt(minutes2Input.value) || 0,
+                    seconds: parseInt(seconds2Input.value) || 0
+                };
+                
+                // Convert both times to total seconds
+                const totalSeconds1 = time1.days * 86400 + time1.hours * 3600 + time1.minutes * 60 + time1.seconds;
+                const totalSeconds2 = time2.days * 86400 + time2.hours * 3600 + time2.minutes * 60 + time2.seconds;
+                
+                // Get selected operation
+                const operation = getSelectedOperation();
+                
+                // Perform calculation
+                let resultSeconds;
+                let operationSymbol = '';
+                
+                if (operation === 'add') {
+                    resultSeconds = totalSeconds1 + totalSeconds2;
+                    operationSymbol = '+';
+                } else {
+                    resultSeconds = totalSeconds1 - totalSeconds2;
+                    operationSymbol = '-';
+                    
+                    // If result is negative, show negative result
+                    if (resultSeconds < 0) {
+                        // Convert negative seconds to positive for display
+                        const absSeconds = Math.abs(resultSeconds);
+                        const days = Math.floor(absSeconds / 86400);
+                        const hours = Math.floor((absSeconds % 86400) / 3600);
+                        const minutes = Math.floor((absSeconds % 3600) / 60);
+                        const seconds = absSeconds % 60;
+                        
+                        resultOutput.textContent = `-${formatTime(days, hours, minutes, seconds)}`;
+                        resultOutput.style.color = '#f44336';
+                        
+                        // Display formula with negative result
+                        let formula = `Time 1: ${time1.days}d ${time1.hours}h ${time1.minutes}m ${time1.seconds}s
+Time 2: ${time2.days}d ${time2.hours}h ${time2.minutes}m ${time2.seconds}s
+Operation: Subtraction (-)
+
+Formula:
+(${time1.days} × 86400) + (${time1.hours} × 3600) + (${time1.minutes} × 60) + ${time1.seconds} = ${totalSeconds1} seconds
+(${time2.days} × 86400) + (${time2.hours} × 3600) + (${time2.minutes} × 60) + ${time2.seconds} = ${totalSeconds2} seconds
+${totalSeconds1} - ${totalSeconds2} = ${resultSeconds} seconds (Negative Result)
+
+Result: -${absSeconds} seconds = -${days}d ${hours}h ${minutes}m ${seconds}s`;
+                        
+                        formulaOutput.textContent = formula;
+                        return;
+                    }
+                }
+                
+                // Convert back to days, hours, minutes, seconds
+                const days = Math.floor(resultSeconds / 86400);
+                const hours = Math.floor((resultSeconds % 86400) / 3600);
+                const minutes = Math.floor((resultSeconds % 3600) / 60);
+                const seconds = resultSeconds % 60;
+                
+                // Display result
+                resultOutput.textContent = formatTime(days, hours, minutes, seconds);
+                resultOutput.style.color = '#333';
+                
+                // Display formula
+                let formula = `Time 1: ${time1.days}d ${time1.hours}h ${time1.minutes}m ${time1.seconds}s
+Time 2: ${time2.days}d ${time2.hours}h ${time2.minutes}m ${time2.seconds}s
+Operation: ${operation === 'add' ? 'Addition (+)' : 'Subtraction (-)'}
+
+Formula:
+(${time1.days} × 86400) + (${time1.hours} × 3600) + (${time1.minutes} × 60) + ${time1.seconds} = ${totalSeconds1} seconds
+(${time2.days} × 86400) + (${time2.hours} × 3600) + (${time2.minutes} × 60) + ${time2.seconds} = ${totalSeconds2} seconds
+${totalSeconds1} ${operationSymbol} ${totalSeconds2} = ${resultSeconds} seconds
+
+Result:
+${resultSeconds} seconds = ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                
+                formulaOutput.textContent = formula;
+            });
+            
+            // Input validation
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (this.value === '') this.value = 0;
+                    
+                    if (this.id.includes('hours') && this.value > 23) {
+                        this.value = 23;
+                    } else if ((this.id.includes('minutes') || this.id.includes('seconds')) && this.value > 59) {
+                        this.value = 59;
+                    } else if (this.value < 0) {
+                        this.value = 0;
+                    }
+                });
+                
+                // Allow arrow keys to increment/decrement
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.value = Math.min(parseInt(this.value || 0) + 1, 
+                            this.id.includes('hours') ? 23 : 
+                            (this.id.includes('minutes') || this.id.includes('seconds')) ? 59 : Infinity);
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        this.value = Math.max(parseInt(this.value || 0) - 1, 0);
+                    }
+                });
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl + A for Add
+                if (e.ctrlKey && e.key === 'a') {
+                    e.preventDefault();
+                    addRadio.checked = true;
+                }
+                // Ctrl + S for Subtract
+                else if (e.ctrlKey && e.key === 's') {
+                    e.preventDefault();
+                    subtractRadio.checked = true;
+                }
+                // Enter key to calculate
+                else if (e.key === 'Enter' && !e.ctrlKey) {
+                    calculateBtn.click();
+                }
+            });
+            
+            // Auto-calculate on radio change
+            addRadio.addEventListener('change', function() {
+                calculateBtn.click();
+            });
+            
+            subtractRadio.addEventListener('change', function() {
+                calculateBtn.click();
+            });
+        });
+ </script>
+   <footer id="footer">
+      <nav>
+      <a href="/privacy.html#terms">Terms of Service</a> | 
+      <a href="/privacy.html#privacy">Privacy Policy</a> |
+      <a href="/privacy.html#about">About Us</a>
+      <br><a href="/privacy.html#contact">Contact Us</a>
+     </nav>
+    <p>&copy; <span id="yearRange"></span> Time of Calculator, All rights reserved.</p>
+  </footer>
+<script>
+  const startYear = 2025; // starting year
+  const currentYear = new Date().getFullYear(); // current year
+  document.getElementById("yearRange").textContent = `${startYear} - ${currentYear}`;
+</script>
+</body>
+</html>
