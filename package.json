@@ -1,0 +1,27 @@
+{
+  "name": "time-of-calculator-suite",
+  "version": "1.0.0",
+  "description": "Official open-source time related calculator utility suite.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [
+    "time calculator",
+    "hours calculator",
+    "date calculator",
+    "age calculator",
+    "timeofcalculator"
+  ],
+  "author": {
+    "name": "Suman Ghosh",
+    "email": "support@timeofcalculator.com",
+    "url": "https://timeofcalculator.com"
+  },
+  "license": "MIT",
+  "homepage": "https://timeofcalculator.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sumgh56/time-of-calculator.git"
+  }
+}
